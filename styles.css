@@ -1,0 +1,107 @@
+/* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+:root {
+    --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+    --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+    --step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+    --step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+    --step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+    --step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+    --step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
+    --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
+
+    --show-descriptions: none;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: gray;
+}
+
+.main_container {
+    max-width: 600px;
+    width: 75%;
+    margin: 1rem auto;
+
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.container {
+    padding: 1rem 1rem 2rem 1rem;
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 16px;
+}
+
+.header {
+    margin-bottom: 1rem;
+    font-size: var(--step-2);
+    /* border: 1px solid silver; */
+    /* border-radius: 8px; */
+    /* background-color: #eee; */
+}
+
+.note {
+    margin: 0.5rem 0;
+}
+
+.big {
+    font-size: var(--step-5);
+}
+
+.medium {
+    font-size: var(--step-2);
+}
+
+.small {
+    font-size: var(--step-1);
+}
+
+#error {
+    display: none;
+    background-color: coral;
+    color: white;
+}
+
+.visible {
+    display: block !important;
+}
+
+.details_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: center;
+    gap: 16px;
+}
+
+.details_list>div {
+    /* min-width: 40%; */
+    /* border: 1px solid green; */
+
+}
+
+.details_label {
+    min-width: 40%;
+    line-height: 24px;
+    text-align: right;
+    font-weight: bolder;
+}
+
+.details_value {
+    min-width: 40%;
+    line-height: 24px;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.details_info {
+    min-width: 80%;
+    display: var(--show-descriptions);
+}

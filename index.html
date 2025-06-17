@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solar time</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="solar.js"></script>
+    <link rel="icon" type="image/x-icon" href="sun.png">
+</head>
+
+<body>
+    <div class="main_container">
+        <div id="error" class="container">
+            Acceso a la geolocalización denegada.
+        </div>
+        <div class="container">
+            <div class="header">Hora solar ☀️</div>
+            <div id="time_solar" class="big">--:--</div>
+            <div class="header">Hora local 🕛</div>
+            <div id="time_local" class="medium">--:--</div>
+        </div>
+        <div class="container">
+            <div class="header">Lugar 🪧</div>
+            <div id="where" class="medium">--</div>
+            <div id="where_latlon" class="small">(--, --)</div>
+        </div>
+        <div class="container">
+            <div class="header">Más detalles 🧾</div>
+            <div class="note">
+                <label for="show_description">Ver descripciones</label>
+                <input type="checkbox" id="show_description" />
+            </div>
+            <div class="details_list">
+                <div class="details_label">Hora legal</div>
+                <div class="details_value" id="reloj">--:--:--</div>
+                <div class="details_info">La que marcan nuestros relojes.</div>
+                <div class="details_label">Hora UTC</div>
+                <div class="details_value" id="relojUTC">--:--:--</div>
+                <div class="details_info">Hora Universal Coordinada, anteriormente conocida como Hora Media de Greenwich
+                    (GMT).</div>
+                <div class="details_label">Hora Civil</div>
+                <div class="details_value" id="relojHML">--:--:--</div>
+                <div class="details_info">Es la hora media referida al meridiano del lugar. Se utiliza frecuentemente en
+                    los anuarios astronómicos para especificar efemérides.</div>
+                <div class="details_label">Hora Solar</div>
+                <div class="details_value" id="relojS">--:--:--</div>
+                <div class="details_info">La hora que marcaría un reloj de Sol al que no se ha aplicado ninguna
+                    corrección.</div>
+                <!-- <div class="details_label">Hora Sidérea</div><div class="details_value" id="reloj_solar">--:--:--</div> -->
+                <div class="details_label">Hora Sidérea</div>
+                <div class="details_value" id="HS">--:--:--</div>
+                <div class="details_info">Tiempo transcurrido desde la última vez en que un punto del cielo llamado
+                    Primer Punto de Aries pasó por encima de nuestro meridiano.</div>
+
+                <div class="details_label">Hora Itálica</div>
+                <div class="details_value" id="Ita">--:--:--</div>
+                <div class="details_info">Tiempo transcurrido desde el último atardecer. Si se resta de 24 nos da el
+                    tiempo que falta para que se ponga el Sol.</div>
+                <div class="details_label">Hora Babilónica</div>
+                <div class="details_value" id="Bab">--:--:--</div>
+                <div class="details_info">Tiempo transcurrido desde el último amanecer.</div>
+                <div class="details_label">Hora Temporaria</div>
+                <div class="details_value" id="Tem">--:--:--</div>
+                <div class="details_info">También llamada hora histórica, resulta de dividir el tiempo de iluminación en
+                    doce horas iguales y el tiempo de oscuridad en otras doce horas iguales entre sí. La duración de una
+                    hora temporaria varía dependiendo del día del año y también según sea nocturna o diurna.</div>
+                <div class="details_label">Hora Canónica</div>
+                <div class="details_value" id="Canti"></div>
+                <div class="details_info">La que marcaría un reloj de Sol orientado hacia el meridiano con su gnomon
+                    perpendicular y con las líneas horarias equiespaciadas. El nombre proviene de que se utilizaba
+                    antiguamente este sistema en los monasterios para determinar las horas de los oficios monacales (que
+                    en sentido estricto deberían ser temporarias).</div>
+
+                <div class="details_label">Declinación</div>
+                <div class="details_value" id="Declinacion"></div>
+                <div class="details_info">Latitud (positiva al Norte) del lugar de la Tierra donde el Sol se encuentra
+                    exactamente en el cénit.</div>
+                <div class="details_label">Longitud geográfica</div>
+                <div class="details_value" id="LonGeog"></div>
+                <div class="details_info">Longitud (negativa al Oeste) del lugar de la Tierra donde el Sol se encuentra
+                    exactamente en el cénit.</div>
+                <div class="details_label">Longitude</div>
+                <div class="details_value" id="Longitude"></div>
+                <div class="details_info">Distancia angular, tomando el Sol como centro, que hay entre el punto en que
+                    se encuentra actualmente la Tierra sobre su órbita y el punto en que se encontraba al entrar la
+                    primavera boreal (Punto Vernal).</div>
+
+                <div class="details_label">Ascensión Recta</div>
+                <div class="details_value" id="AscRec">--:--:--</div>
+                <div class="details_info">Proyección sobre el plano ecuatorial de la longitud eclíptica. Por motivos
+                    prácticos se mide en horas, pues también indica el tiempo sidéreo que lleva el Sol de retraso
+                    respecto al Primer Punto de Aries.</div>
+                <div class="details_label">Ecuación del Tiempo</div>
+                <div class="details_value" id="EcuaTiem"></div>
+                <div class="details_info">Diferencia entre la hora marcada por un reloj mecánico y la de un reloj de Sol
+                    corregido en longitud o, lo que es lo mismo, el tiempo que hay que añadir a un reloj de Sol para que
+                    muestre la hora civil. <br />Debido a la inclinación del eje de la Tierra y al movimiento no
+                    uniforme en su órbita alrededor del Sol, esta cantidad es no nula y variable según la época del
+                    año.<br />Se mide como el retraso del sol sobre las 12:00:00 horas a su paso por el meridiano de
+                    referencia. Se observa que esta convención es opuesta a la de los astrónomos, que miden la EdT como
+                    un adelanto en vez de como un atraso.</div>
+
+                <div class="details_label">Elevación</div>
+                <div class="details_value" id="Elev">- º</div>
+                <div class="details_info">Altura que tiene el Sol sobre el horizonte, medida en grados.</div>
+                <div class="details_label">Máxima elevación</div>
+                <div class="details_value" id="MaxElev">- º</div>
+                <div class="details_info">La mayor altura que alcanza hoy el Sol, medida en grados.</div>
+                <div class="details_label">Azimut</div>
+                <div class="details_value" id="Acimut">- º</div>
+                <div class="details_info">Dirección horizontal sobre la que se encuentra el Sol. Se mide en grados desde
+                    el Sur hacia el Oeste en el Hemisferio Norte y desde el Norte hacia el Este en el Hemisferio Sur.
+                </div>
+                <div class="details_label">Azimut ocaso</div>
+                <div class="details_value" id="AcimutOcaso">- º</div>
+                <div class="details_info">La dirección horizontal del punto en que se pone hoy el Sol.</div>
+
+                <div class="details_label">Alba</div>
+                <div class="details_value" id="Orto">--:--:--</div>
+                <div class="details_info">Instante en que el centro del Sol asciende sobre el horizonte.</div>
+                <div class="details_label">Mediodía</div>
+                <div class="details_value" id="Mediodia">--:--:--</div>
+                <div class="details_info">Instante en que el centro del Sol pasa por encima de nuestro meridiano.
+                    Coincide casi exactamente con el momento en que alcanza su máxima elevación.</div>
+                <div class="details_label">Ocaso</div>
+                <div class="details_value" id="Ocaso">--:--:--</div>
+                <div class="details_info">Instante en que el centro del Sol se oculta bajo el horizonte.</div>
+                <div class="details_label">Período de insolación</div>
+                <div class="details_value" id="Duracion">--:--:--</div>
+                <div class="details_info">Tiempo que transcurre desde que amanece hasta que anochece en el día actual.
+                </div>
+
+                <div class="details_label">Fecha gregoriana</div>
+                <div class="details_value" id="fecha"></div>
+                <div class="details_info">Fecha actual expresada según la ISO.</div>
+                <div class="details_label">Día Juliano</div>
+                <div class="details_value" id="diajuliano"></div>
+                <div class="details_info">Cantidad de días transcurridos desde el mediodía UTC del día uno de enero del
+                    año 4173 AC.
+                    Se utiliza mucho al realizar cálculos astronómicos.</div>
+            </div>
+        </div>
+    </div>
+    <script src="code.js"></script>
+</body>
+
+</html>
